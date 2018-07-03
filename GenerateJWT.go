@@ -6,6 +6,7 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
+//GenerateJWT generates a jwt token in form of a string
 func GenerateJWT(request TokenRequest, duration time.Duration, key string) (string, error) {
 	claims := Token{
 		request.UserARN,
