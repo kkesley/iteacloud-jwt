@@ -8,6 +8,11 @@ import (
 
 //GenerateJWT generates a jwt token in form of a string
 func GenerateJWT(request TokenRequest, duration time.Duration, key string) (string, error) {
+	return GenerateJWTWithIssuer(request, duration, key, "iteacloud")
+}
+
+//GenerateJWTWithIssuer generates a jwt token in form of a string with an issuer
+func GenerateJWTWithIssuer(request TokenRequest, duration time.Duration, key string, issuer string) (string, error) {
 	claims := Token{
 		TokenRequest{
 			request.UserARN,
@@ -21,7 +26,7 @@ func GenerateJWT(request TokenRequest, duration time.Duration, key string) (stri
 		},
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(duration).Unix(),
-			Issuer:    "iteacloud",
+			Issuer:    issuer,
 			NotBefore: time.Now().Unix(),
 			IssuedAt:  time.Now().Unix(),
 		},
