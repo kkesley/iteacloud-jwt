@@ -1,4 +1,4 @@
-package jwt
+package jwtidentity
 
 //TokenRequest request object for generating JWT
 type TokenRequest struct {

@@ -1,4 +1,4 @@
-package jwt
+package jwtidentity
 
 import jwt "github.com/dgrijalva/jwt-go"
 

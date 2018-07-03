@@ -1,4 +1,4 @@
-package jwt
+package jwtemail
 
 import (
 	"time"
@@ -15,14 +15,8 @@ func GenerateJWT(request TokenRequest, duration time.Duration, key string) (stri
 func GenerateJWTWithIssuer(request TokenRequest, duration time.Duration, key string, issuer string) (string, error) {
 	claims := Token{
 		TokenRequest{
-			request.UserARN,
+			request.Email,
 			request.ClientID,
-			request.ClientName,
-			request.FirstName,
-			request.LastName,
-			request.Username,
-			request.Groups,
-			request.Permissions,
 		},
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(duration).Unix(),

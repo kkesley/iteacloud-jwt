@@ -1,4 +1,4 @@
-package jwt
+package jwtemail
 
 import (
 	"fmt"
@@ -8,14 +8,8 @@ import (
 
 func TestVerifier(test *testing.T) {
 	request := TokenRequest{
-		UserARN:     "test-arn",
-		ClientID:    1,
-		ClientName:  "test",
-		FirstName:   "hello",
-		LastName:    "there",
-		Username:    "abc",
-		Groups:      []string{"FLUFFY"},
-		Permissions: []string{"*"},
+		Email:    "kk@gmail.com",
+		ClientID: 1,
 	}
 	jwt, err := GenerateJWT(request, time.Hour*1, "SuperSecretKeyOnlyForThisApplication")
 	claims, err := VerifyToken(jwt, "SuperSecretKeyOnlyForThisApplication")

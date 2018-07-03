@@ -1,4 +1,4 @@
-package jwt
+package jwtemail
 
 import (
 	"errors"

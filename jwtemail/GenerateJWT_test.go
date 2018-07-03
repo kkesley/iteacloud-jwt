@@ -1,4 +1,4 @@
-package jwt
+package jwtemail
 
 import (
 	"fmt"
@@ -8,14 +8,8 @@ import (
 
 func TestGenerateJWT(test *testing.T) {
 	request := TokenRequest{
-		UserARN:     "test-arn",
-		ClientID:    1,
-		ClientName:  "test",
-		FirstName:   "hello",
-		LastName:    "there",
-		Username:    "abc",
-		Groups:      []string{"FLUFFY"},
-		Permissions: []string{"*"},
+		Email:    "kk@gmail.com",
+		ClientID: 1,
 	}
 	jwt, err := GenerateJWT(request, time.Minute*1, "SuperSecretKeyOnlyForThisApplication")
 	if err != nil {
@@ -27,14 +21,8 @@ func TestGenerateJWT(test *testing.T) {
 
 func TestGenerateJWTWithIssuer(test *testing.T) {
 	request := TokenRequest{
-		UserARN:     "test-arn",
-		ClientID:    1,
-		ClientName:  "test",
-		FirstName:   "hello",
-		LastName:    "there",
-		Username:    "abc",
-		Groups:      []string{"FLUFFY"},
-		Permissions: []string{"*"},
+		Email:    "kk@gmail.com",
+		ClientID: 1,
 	}
 	jwt, err := GenerateJWTWithIssuer(request, time.Minute*1, "SuperSecretKeyOnlyForThisApplication", "pss")
 	if err != nil {
