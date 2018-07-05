@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"testing"
 	"time"
+
+	"github.com/aws/aws-sdk-go/aws"
 )
 
 func TestGenerateJWT(test *testing.T) {
@@ -11,8 +13,8 @@ func TestGenerateJWT(test *testing.T) {
 		UserARN:     "test-arn",
 		ClientID:    1,
 		ClientName:  "test",
-		FirstName:   "hello",
-		LastName:    "there",
+		FirstName:   aws.String("hello"),
+		LastName:    aws.String("there"),
 		Username:    "abc",
 		Groups:      []string{"FLUFFY"},
 		Permissions: []string{"*"},
@@ -30,8 +32,8 @@ func TestGenerateJWTWithIssuer(test *testing.T) {
 		UserARN:     "test-arn",
 		ClientID:    1,
 		ClientName:  "test",
-		FirstName:   "hello",
-		LastName:    "there",
+		FirstName:   aws.String("hello"),
+		LastName:    aws.String("there"),
 		Username:    "abc",
 		Groups:      []string{"FLUFFY"},
 		Permissions: []string{"*"},
