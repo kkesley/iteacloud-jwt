@@ -4,6 +4,8 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+
+	"github.com/aws/aws-sdk-go/aws"
 )
 
 //GenerateAuthToken generate from map to auth token
@@ -31,9 +33,9 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 			case "ClientName":
 				token.ClientName = value
 			case "FirstName":
-				token.FirstName = value
+				token.FirstName = aws.String(value)
 			case "LastName":
-				token.LastName = value
+				token.LastName = aws.String(value)
 			case "Username":
 				token.Username = value
 			case "Groups":
