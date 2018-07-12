@@ -15,6 +15,7 @@ func GenerateJWT(request TokenRequest, duration time.Duration, key string) (stri
 func GenerateJWTWithIssuer(request TokenRequest, duration time.Duration, key string, issuer string) (string, error) {
 	claims := Token{
 		TokenRequest{
+			request.IsRoot,
 			request.UserARN,
 			request.RoleARN,
 			request.ClientID,
