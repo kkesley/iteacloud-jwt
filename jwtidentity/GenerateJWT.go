@@ -16,6 +16,7 @@ func GenerateJWTWithIssuer(request TokenRequest, duration time.Duration, key str
 	claims := Token{
 		TokenRequest{
 			request.UserARN,
+			request.RoleARN,
 			request.ClientID,
 			request.ClientName,
 			request.FirstName,
