@@ -2,7 +2,6 @@ package jwtidentity
 
 import (
 	"reflect"
-	"strconv"
 	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -18,36 +17,58 @@ func GenerateAuthToken(authContext map[string]interface{}) TokenRequest {
 func iterateAuthContext(fields []string, token *TokenRequest, context map[string]interface{}) {
 	for _, field := range fields {
 		if context[field] != nil {
-			value := context[field].(string)
 			fieldType := reflect.TypeOf(context[field]).String()
-			if fieldType != "string" {
-				continue
-			}
 			switch field {
 			case "IsRoot":
-				if isRoot, err := strconv.ParseBool(value); err == nil {
-					token.IsRoot = isRoot
+				if fieldType != "bool" {
+					continue
 				}
+				token.IsRoot = context[field].(bool)
 			case "UserARN":
-				token.UserARN = value
-			case "RoleARN":
-				token.RoleARN = value
-			case "ClientID":
-				if clientID, err := strconv.ParseUint(value, 10, 64); err == nil {
-					token.ClientID = clientID
+				if fieldType != "string" {
+					continue
 				}
+				token.UserARN = context[field].(string)
+			case "RoleARN":
+				if fieldType != "string" {
+					continue
+				}
+				token.RoleARN = context[field].(string)
+			case "ClientID":
+				if fieldType != "float64" {
+					continue
+				}
+				token.ClientID = uint64(context[field].(float64))
 			case "ClientName":
-				token.ClientName = value
+				if fieldType != "string" {
+					continue
+				}
+				token.ClientName = context[field].(string)
 			case "FirstName":
-				token.FirstName = aws.String(value)
+				if fieldType != "string" {
+					continue
+				}
+				token.FirstName = aws.String(context[field].(string))
 			case "LastName":
-				token.LastName = aws.String(value)
+				if fieldType != "string" {
+					continue
+				}
+				token.LastName = aws.String(context[field].(string))
 			case "Username":
-				token.Username = value
+				if fieldType != "string" {
+					continue
+				}
+				token.Username = context[field].(string)
 			case "Groups":
-				token.Groups = strings.Split(value, ",")
+				if fieldType != "string" {
+					continue
+				}
+				token.Groups = strings.Split(context[field].(string), ",")
 			case "Permissions":
-				token.Permissions = strings.Split(value, ",")
+				if fieldType != "string" {
+					continue
+				}
+				token.Permissions = strings.Split(context[field].(string), ",")
 			}
 		}
 	}

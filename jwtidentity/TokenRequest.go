@@ -2,14 +2,14 @@ package jwtidentity
 
 //TokenRequest request object for generating JWT
 type TokenRequest struct {
-	IsRoot      bool     `json:"is_root"`
-	UserARN     string   `json:"user_arn"`
-	RoleARN     string   `json:"role_arn"`
-	ClientID    uint64   `json:"client_id"`
-	ClientName  string   `json:"client_name"`
-	FirstName   *string  `json:"first_name"`
-	LastName    *string  `json:"last_name"`
-	Username    string   `json:"username"`
-	Groups      []string `json:"groups"`
-	Permissions []string `json:"permissions"`
+	IsRoot      bool     `json:"IsRoot"`
+	UserARN     string   `json:"UserARN"`
+	RoleARN     string   `json:"RoleARN"`
+	ClientID    uint64   `json:"ClientID"`
+	ClientName  string   `json:"ClientName"`
+	FirstName   *string  `json:"FirstName"`
+	LastName    *string  `json:"LastName"`
+	Username    string   `json:"Username"`
+	Groups      []string `json:"Groups"`
+	Permissions []string `json:"Permissions"`
 }
