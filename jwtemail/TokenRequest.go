@@ -6,4 +6,5 @@ type TokenRequest struct {
 	ClientID     uint64 `json:"client_id,omitempty"`
 	Username     string `json:"username,omitempty"`
 	ClientPrefix string `json:"client_prefix,omitempty"`
+	IsRoot       bool   `json:"is_root"`
 }
