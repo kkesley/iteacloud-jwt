@@ -4,14 +4,14 @@ import (
 	"reflect"
 )
 
-//GenerateEmailToken generate from map to Email token
-func GenerateEmailToken(emailContext map[string]interface{}) TokenRequest {
-	emailToken := TokenRequest{}
-	iterateEmailContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Username"}, &emailToken, emailContext)
-	return emailToken
+//GenerateForgetPasswordToken generate from map to Forget Password token
+func GenerateForgetPasswordToken(context map[string]interface{}) TokenRequest {
+	forgetPasswordToken := TokenRequest{}
+	iterateForgetPasswordContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Username"}, &forgetPasswordToken, context)
+	return forgetPasswordToken
 }
 
-func iterateEmailContext(fields []string, token *TokenRequest, context map[string]interface{}) {
+func iterateForgetPasswordContext(fields []string, token *TokenRequest, context map[string]interface{}) {
 	for _, field := range fields {
 		if context[field] != nil {
 			fieldType := reflect.TypeOf(context[field]).String()
