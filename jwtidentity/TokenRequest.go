@@ -4,7 +4,7 @@ package jwtidentity
 type TokenRequest struct {
 	IsRoot      bool     `json:"IsRoot"`
 	UserARN     string   `json:"UserARN"`
-	RoleARN     string   `json:"RoleARN"`
+	RoleARN     []string `json:"RoleARN"`
 	ClientID    uint64   `json:"ClientID"`
 	ClientName  string   `json:"ClientName"`
 	FirstName   *string  `json:"FirstName"`

@@ -33,7 +33,7 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 				if fieldType != "string" {
 					continue
 				}
-				token.RoleARN = context[field].(string)
+				token.RoleARN = strings.Split(context[field].(string), ",")
 			case "ClientID":
 				if fieldType != "float64" {
 					continue

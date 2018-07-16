@@ -7,7 +7,7 @@ func GenerateInterfaceToken(token TokenRequest) map[string]interface{} {
 	return map[string]interface{}{
 		"IsRoot":      token.IsRoot,
 		"UserARN":     token.UserARN,
-		"RoleARN":     token.RoleARN,
+		"RoleARN":     strings.Join(token.RoleARN, ","),
 		"ClientID":    token.ClientID,
 		"FirstName":   token.FirstName,
 		"LastName":    token.LastName,
