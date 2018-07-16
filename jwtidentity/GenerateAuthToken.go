@@ -2,7 +2,6 @@ package jwtidentity
 
 import (
 	"reflect"
-	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
 )
@@ -30,10 +29,15 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 				}
 				token.UserARN = context[field].(string)
 			case "RoleARN":
-				if fieldType != "string" {
+				if fieldType != "[]interface {}" {
 					continue
 				}
-				token.RoleARN = strings.Split(context[field].(string), ",")
+				token.RoleARN = make([]string, 0)
+				for _, value := range context[field].([]interface{}) {
+					if reflect.TypeOf(value).String() == "string" {
+						token.RoleARN = append(token.RoleARN, value.(string))
+					}
+				}
 			case "ClientID":
 				if fieldType != "float64" {
 					continue
@@ -60,15 +64,25 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 				}
 				token.Username = context[field].(string)
 			case "Groups":
-				if fieldType != "string" {
+				if fieldType != "[]interface {}" {
 					continue
 				}
-				token.Groups = strings.Split(context[field].(string), ",")
+				token.Groups = make([]string, 0)
+				for _, value := range context[field].([]interface{}) {
+					if reflect.TypeOf(value).String() == "string" {
+						token.Groups = append(token.Groups, value.(string))
+					}
+				}
 			case "Permissions":
-				if fieldType != "string" {
+				if fieldType != "[]interface {}" {
 					continue
 				}
-				token.Permissions = strings.Split(context[field].(string), ",")
+				token.Permissions = make([]string, 0)
+				for _, value := range context[field].([]interface{}) {
+					if reflect.TypeOf(value).String() == "string" {
+						token.Permissions = append(token.Permissions, value.(string))
+					}
+				}
 			}
 		}
 	}
