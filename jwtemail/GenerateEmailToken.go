@@ -7,7 +7,7 @@ import (
 //GenerateEmailToken generate from map to Email token
 func GenerateEmailToken(emailContext map[string]interface{}) TokenRequest {
 	emailToken := TokenRequest{}
-	iterateEmailContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Email", "Username"}, &emailToken, emailContext)
+	iterateEmailContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Email", "Username", "Time"}, &emailToken, emailContext)
 	return emailToken
 }
 
@@ -41,6 +41,11 @@ func iterateEmailContext(fields []string, token *TokenRequest, context map[strin
 					continue
 				}
 				token.Username = context[field].(string)
+			case "Time":
+				if fieldType != "float64" {
+					continue
+				}
+				token.Time = int64(context[field].(float64))
 			}
 		}
 	}
