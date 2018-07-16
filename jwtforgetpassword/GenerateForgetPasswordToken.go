@@ -7,7 +7,7 @@ import (
 //GenerateForgetPasswordToken generate from map to Forget Password token
 func GenerateForgetPasswordToken(context map[string]interface{}) TokenRequest {
 	forgetPasswordToken := TokenRequest{}
-	iterateForgetPasswordContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Username", "Time"}, &forgetPasswordToken, context)
+	iterateForgetPasswordContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Username", "Time", "UserARN"}, &forgetPasswordToken, context)
 	return forgetPasswordToken
 }
 
@@ -16,6 +16,11 @@ func iterateForgetPasswordContext(fields []string, token *TokenRequest, context 
 		if context[field] != nil {
 			fieldType := reflect.TypeOf(context[field]).String()
 			switch field {
+			case "UserARN":
+				if fieldType != "string" {
+					continue
+				}
+				token.UserARN = context[field].(string)
 			case "IsRoot":
 				if fieldType != "bool" {
 					continue
