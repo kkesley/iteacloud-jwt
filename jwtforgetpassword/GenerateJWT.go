@@ -19,6 +19,7 @@ func GenerateJWTWithIssuer(request TokenRequest, duration time.Duration, key str
 			request.ClientID,
 			request.ClientPrefix,
 			request.IsRoot,
+			request.Time,
 		},
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(duration).Unix(),

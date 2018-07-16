@@ -7,7 +7,7 @@ import (
 //GenerateForgetPasswordToken generate from map to Forget Password token
 func GenerateForgetPasswordToken(context map[string]interface{}) TokenRequest {
 	forgetPasswordToken := TokenRequest{}
-	iterateForgetPasswordContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Username"}, &forgetPasswordToken, context)
+	iterateForgetPasswordContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Username", "Time"}, &forgetPasswordToken, context)
 	return forgetPasswordToken
 }
 
@@ -36,6 +36,11 @@ func iterateForgetPasswordContext(fields []string, token *TokenRequest, context 
 					continue
 				}
 				token.Username = context[field].(string)
+			case "Time":
+				if fieldType != "float64" {
+					continue
+				}
+				token.Time = int64(context[field].(float64))
 			}
 		}
 	}
