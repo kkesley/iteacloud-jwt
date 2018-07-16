@@ -73,16 +73,6 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 						token.Groups = append(token.Groups, value.(string))
 					}
 				}
-			case "Permissions":
-				if fieldType != "[]interface {}" {
-					continue
-				}
-				token.Permissions = make([]string, 0)
-				for _, value := range context[field].([]interface{}) {
-					if reflect.TypeOf(value).String() == "string" {
-						token.Permissions = append(token.Permissions, value.(string))
-					}
-				}
 			}
 		}
 	}
