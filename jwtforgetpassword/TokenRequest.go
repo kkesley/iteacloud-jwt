@@ -1,4 +1,4 @@
-package jwtemail
+package jwtforgetpassword
 
 //TokenRequest request object for generating JWT
 type TokenRequest struct {

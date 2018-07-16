@@ -1,4 +1,4 @@
-package jwtemail
+package jwtforgetpassword
 
 import (
 	"fmt"

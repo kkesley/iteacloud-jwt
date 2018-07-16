@@ -1,4 +1,4 @@
-package jwtemail
+package jwtforgetpassword
 
 import jwt "github.com/dgrijalva/jwt-go"
 
