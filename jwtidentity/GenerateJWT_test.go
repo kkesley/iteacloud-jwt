@@ -10,14 +10,13 @@ import (
 
 func TestGenerateJWT(test *testing.T) {
 	request := TokenRequest{
-		UserARN:     "test-arn",
-		ClientID:    1,
-		ClientName:  "test",
-		FirstName:   aws.String("hello"),
-		LastName:    aws.String("there"),
-		Username:    "abc",
-		Groups:      []string{"FLUFFY"},
-		Permissions: []string{"*"},
+		UserARN:    "test-arn",
+		ClientID:   1,
+		ClientName: "test",
+		FirstName:  aws.String("hello"),
+		LastName:   aws.String("there"),
+		Username:   "abc",
+		Groups:     []string{"FLUFFY"},
 	}
 	jwt, err := GenerateJWT(request, time.Minute*1, "SuperSecretKeyOnlyForThisApplication")
 	if err != nil {
@@ -29,14 +28,13 @@ func TestGenerateJWT(test *testing.T) {
 
 func TestGenerateJWTWithIssuer(test *testing.T) {
 	request := TokenRequest{
-		UserARN:     "test-arn",
-		ClientID:    1,
-		ClientName:  "test",
-		FirstName:   aws.String("hello"),
-		LastName:    aws.String("there"),
-		Username:    "abc",
-		Groups:      []string{"FLUFFY"},
-		Permissions: []string{"*"},
+		UserARN:    "test-arn",
+		ClientID:   1,
+		ClientName: "test",
+		FirstName:  aws.String("hello"),
+		LastName:   aws.String("there"),
+		Username:   "abc",
+		Groups:     []string{"FLUFFY"},
 	}
 	jwt, err := GenerateJWTWithIssuer(request, time.Minute*1, "SuperSecretKeyOnlyForThisApplication", "pss")
 	if err != nil {
