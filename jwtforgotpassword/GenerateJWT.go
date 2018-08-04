@@ -1,4 +1,4 @@
-package jwtforgetpassword
+package jwtforgotpassword
 
 import (
 	"time"

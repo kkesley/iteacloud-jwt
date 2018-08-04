@@ -1,4 +1,4 @@
-package jwtforgetpassword
+package jwtforgotpassword
 
 import (
 	"errors"
@@ -11,7 +11,7 @@ import (
 //VerifyToken verifies jwt token
 func VerifyToken(tokenString string, key string) (jwt.MapClaims, error) {
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		// Don't forget to validate the alg is what you expect:
+		// Don't forgot to validate the alg is what you expect:
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}

@@ -1,17 +1,17 @@
-package jwtforgetpassword
+package jwtforgotpassword
 
 import (
 	"reflect"
 )
 
-//GenerateForgetPasswordToken generate from map to Forget Password token
-func GenerateForgetPasswordToken(context map[string]interface{}) TokenRequest {
-	forgetPasswordToken := TokenRequest{}
-	iterateForgetPasswordContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Username", "Time", "UserARN"}, &forgetPasswordToken, context)
-	return forgetPasswordToken
+//GenerateForgotPasswordToken generate from map to Forgot Password token
+func GenerateForgotPasswordToken(context map[string]interface{}) TokenRequest {
+	forgotPasswordToken := TokenRequest{}
+	iterateForgotPasswordContext([]string{"IsRoot", "ClientPrefix", "ClientID", "Username", "Time", "UserARN"}, &forgotPasswordToken, context)
+	return forgotPasswordToken
 }
 
-func iterateForgetPasswordContext(fields []string, token *TokenRequest, context map[string]interface{}) {
+func iterateForgotPasswordContext(fields []string, token *TokenRequest, context map[string]interface{}) {
 	for _, field := range fields {
 		if context[field] != nil {
 			fieldType := reflect.TypeOf(context[field]).String()
