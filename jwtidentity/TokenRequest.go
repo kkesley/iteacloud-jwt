@@ -11,4 +11,5 @@ type TokenRequest struct {
 	LastName   *string  `json:"LastName"`
 	Username   string   `json:"Username"`
 	Groups     []string `json:"Groups"`
+	Device     string   `json:"Device"`
 }

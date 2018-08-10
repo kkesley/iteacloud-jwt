@@ -9,7 +9,7 @@ import (
 //GenerateAuthToken generate from map to auth token
 func GenerateAuthToken(authContext map[string]interface{}) TokenRequest {
 	authToken := TokenRequest{}
-	iterateAuthContext([]string{"IsRoot", "UserARN", "RoleARN", "ClientID", "ClientName", "FirstName", "LastName", "Username", "Groups", "Permissions"}, &authToken, authContext)
+	iterateAuthContext([]string{"IsRoot", "UserARN", "RoleARN", "ClientID", "ClientName", "FirstName", "LastName", "Username", "Groups", "Permissions", "Device"}, &authToken, authContext)
 	return authToken
 }
 
@@ -73,6 +73,11 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 						token.Groups = append(token.Groups, value.(string))
 					}
 				}
+			case "Device":
+				if fieldType != "string" {
+					continue
+				}
+				token.Username = context[field].(string)
 			}
 		}
 	}

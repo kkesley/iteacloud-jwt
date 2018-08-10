@@ -13,5 +13,6 @@ func GenerateInterfaceToken(token TokenRequest) map[string]interface{} {
 		"LastName":  token.LastName,
 		"Username":  token.Username,
 		"Groups":    strings.Join(token.Groups, ","),
+		"Device":    token.Device,
 	}
 }
