@@ -77,7 +77,7 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 				if fieldType != "string" {
 					continue
 				}
-				token.Username = context[field].(string)
+				token.Device = context[field].(string)
 			}
 		}
 	}
