@@ -10,6 +10,7 @@ import (
 
 func TestGenerateJWT(test *testing.T) {
 	request := TokenRequest{
+		IsRoot:     true,
 		UserARN:    "test-arn",
 		ClientID:   1,
 		ClientName: "test",

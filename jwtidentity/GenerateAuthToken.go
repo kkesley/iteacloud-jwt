@@ -2,6 +2,8 @@ package jwtidentity
 
 import (
 	"reflect"
+	"strconv"
+	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
 )
@@ -19,30 +21,34 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 			fieldType := reflect.TypeOf(context[field]).String()
 			switch field {
 			case "IsRoot":
-				if fieldType != "bool" {
-					continue
+				if fieldType == "string" {
+					token.IsRoot, _ = strconv.ParseBool(context[field].(string))
+				} else if fieldType == "bool" {
+					token.IsRoot = context[field].(bool)
 				}
-				token.IsRoot = context[field].(bool)
+
 			case "UserARN":
 				if fieldType != "string" {
 					continue
 				}
 				token.UserARN = context[field].(string)
 			case "RoleARN":
-				if fieldType != "[]interface {}" {
-					continue
-				}
-				token.RoleARN = make([]string, 0)
-				for _, value := range context[field].([]interface{}) {
-					if reflect.TypeOf(value).String() == "string" {
-						token.RoleARN = append(token.RoleARN, value.(string))
+				if fieldType == "string" {
+					token.RoleARN = strings.Split(context[field].(string), ",")
+				} else if fieldType == "[]interface {}" {
+					for _, value := range context[field].([]interface{}) {
+						if reflect.TypeOf(value).String() == "string" {
+							token.RoleARN = append(token.RoleARN, value.(string))
+						}
 					}
 				}
 			case "ClientID":
-				if fieldType != "float64" {
-					continue
+				if fieldType == "string" {
+					token.ClientID, _ = strconv.ParseUint(context[field].(string), 10, 64)
+				} else if fieldType == "float64" {
+					token.ClientID = uint64(context[field].(float64))
 				}
-				token.ClientID = uint64(context[field].(float64))
+
 			case "ClientName":
 				if fieldType != "string" {
 					continue
@@ -64,15 +70,16 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 				}
 				token.Username = context[field].(string)
 			case "Groups":
-				if fieldType != "[]interface {}" {
-					continue
-				}
-				token.Groups = make([]string, 0)
-				for _, value := range context[field].([]interface{}) {
-					if reflect.TypeOf(value).String() == "string" {
-						token.Groups = append(token.Groups, value.(string))
+				if fieldType == "string" {
+					token.Groups = strings.Split(context[field].(string), ",")
+				} else if fieldType == "[]interface {}" {
+					for _, value := range context[field].([]interface{}) {
+						if reflect.TypeOf(value).String() == "string" {
+							token.Groups = append(token.Groups, value.(string))
+						}
 					}
 				}
+
 			case "Device":
 				if fieldType != "string" {
 					continue

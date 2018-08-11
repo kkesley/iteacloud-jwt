@@ -1,11 +1,14 @@
 package jwtidentity
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+)
 
 //GenerateInterfaceToken generate from token to map
 func GenerateInterfaceToken(token TokenRequest) map[string]interface{} {
 	return map[string]interface{}{
-		"IsRoot":    token.IsRoot,
+		"IsRoot":    strconv.FormatBool(token.IsRoot),
 		"UserARN":   token.UserARN,
 		"RoleARN":   strings.Join(token.RoleARN, ","),
 		"ClientID":  token.ClientID,
