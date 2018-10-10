@@ -6,6 +6,7 @@ type TokenRequest struct {
 	UserARN    string   `json:"UserARN"`
 	RoleARN    []string `json:"RoleARN"`
 	ClientID   uint64   `json:"ClientID"`
+	ClientARN  string   `json:"ClientARN"`
 	ClientName string   `json:"ClientName"`
 	FirstName  *string  `json:"FirstName"`
 	LastName   *string  `json:"LastName"`

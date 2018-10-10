@@ -11,7 +11,7 @@ import (
 //GenerateAuthToken generate from map to auth token
 func GenerateAuthToken(authContext map[string]interface{}) TokenRequest {
 	authToken := TokenRequest{}
-	iterateAuthContext([]string{"IsRoot", "UserARN", "RoleARN", "ClientID", "ClientName", "FirstName", "LastName", "Username", "Groups", "Permissions", "Device"}, &authToken, authContext)
+	iterateAuthContext([]string{"IsRoot", "UserARN", "RoleARN", "ClientID", "ClientARN", "ClientName", "FirstName", "LastName", "Username", "Groups", "Permissions", "Device"}, &authToken, authContext)
 	return authToken
 }
 
@@ -48,7 +48,11 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 				} else if fieldType == "float64" {
 					token.ClientID = uint64(context[field].(float64))
 				}
-
+			case "ClientARN":
+				if fieldType != "string" {
+					continue
+				}
+				token.ClientARN = context[field].(string)
 			case "ClientName":
 				if fieldType != "string" {
 					continue

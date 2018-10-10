@@ -31,6 +31,7 @@ func TestGenerateJWTWithIssuer(test *testing.T) {
 	request := TokenRequest{
 		UserARN:    "test-arn",
 		ClientID:   1,
+		ClientARN:  "client-arn",
 		ClientName: "test",
 		FirstName:  aws.String("hello"),
 		LastName:   aws.String("there"),
