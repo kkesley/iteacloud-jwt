@@ -26,6 +26,7 @@ func GenerateJWTWithIssuer(request TokenRequest, duration time.Duration, key str
 			request.Username,
 			request.Groups,
 			request.Device,
+			request.IsPublic,
 		},
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(duration).Unix(),

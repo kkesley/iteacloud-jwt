@@ -13,4 +13,5 @@ type TokenRequest struct {
 	Username   string   `json:"Username"`
 	Groups     []string `json:"Groups"`
 	Device     string   `json:"Device"`
+	IsPublic   bool     `json:"IsPublic"`
 }

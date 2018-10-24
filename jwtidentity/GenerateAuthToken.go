@@ -89,7 +89,15 @@ func iterateAuthContext(fields []string, token *TokenRequest, context map[string
 					continue
 				}
 				token.Device = context[field].(string)
+
+			case "IsPublic":
+				if fieldType == "string" {
+					token.IsPublic, _ = strconv.ParseBool(context[field].(string))
+				} else if fieldType == "bool" {
+					token.IsPublic = context[field].(bool)
+				}
 			}
+
 		}
 	}
 }
